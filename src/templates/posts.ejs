@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="/static/post.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1>Интересные посты для вас</h1>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="container">
+            <section class="news-posts">
+                <% posts.forEach((post) => { %>
+                    <article class="post">
+                        <header class="post-header">
+                            <h3 class="post-title"><%= post.post %></h3>
+                        </header>
+                        <div class="post-content">
+                            <p class="post-text"><%= post.text %></p>
+                        </div>
+                    </article>
+                <% }) %>
+            </section>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 Посты. Не уверенна, что наши права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
