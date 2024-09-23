@@ -14,18 +14,18 @@
 
     <div class="content">
         <div class="container">
-            <section class="news-posts">
+            <div class="news-posts">
                 <% posts.forEach((post) => { %>
-                    <article class="post">
-                        <header class="post-header">
+                    <div class="post">
+                        <div class="post-header">
                             <h3 class="post-title"><%= post.post %></h3>
-                        </header>
+                        </div>
                         <div class="post-content">
                             <p class="post-text"><%= post.text %></p>
                         </div>
-                    </article>
+                    </div>
                 <% }) %>
-            </section>
+            </sdiv>
         </div>
     </div>
 
