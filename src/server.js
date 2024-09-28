@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
     res.render('index');  // Рендерим index.ejs
 });
 
+app.get('/user', (req, res) => {
+    res.render('index');
+});
+
 app.get('/date', (req, res) => {
     res.render('date');  // Рендерим date.ejs
 });
