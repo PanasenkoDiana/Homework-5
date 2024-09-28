@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Комментарии</title>
+    <link rel="stylesheet" href="/static/comments.css">
+</head>
+<body>
+    <% comments.forEach(function(comment) { %>
+        <div class="comment-container">
+            <h1 class="comment-title"><%= comment.title %></h1>
+            <div class="comment-body">
+                <div class="left-section">
+                    <p class="author-name"><%= comment.author %></p>
+                    <img src="/static/default-user-icon.png" alt="Default User Icon" class="author-img">
+                </div>
+                <div class="divider"></div>
+                <div class="right-section">
+                    <p class="message"><%= comment.message %></p>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+</body>
+</html>
