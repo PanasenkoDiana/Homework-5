@@ -1,10 +1,15 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -25,6 +30,7 @@ body {
 }
 
 .content {
+    flex: 1; /* Это позволит занять всё доступное пространство */
     padding: 20px 0;
 }
 
@@ -41,8 +47,19 @@ body {
     border-radius: 7px;
 }
 
+#button {
+    display: block;
+    margin: 40px auto; 
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 .site-footer {
     background-color: #333;
     color: #fff;
     text-align: center;
+    padding: 10px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
 }
