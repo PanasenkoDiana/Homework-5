@@ -3,6 +3,7 @@ package-lock.json
 
 # Keep environment variables out of version control
 .env
-db/
+*.db/
 migrations/
 .vscode
+post.db-journal
