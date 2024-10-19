@@ -1,60 +1,81 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
-async function createOnePost() {
-  const post = await prisma.posts.create({
+async function createOneComment(postId: number) {
+  const comment = await prisma.Comments.create({
     data: {
-      post: 'Первый пост',
-      text: 'Cодержимое первого поста',
+      title: 'Первый комментарий',
+      author: 'Автор 1',
+      message: 'Текст первого комментария',
+      postId: postId,
     },
   });
-  console.log('Создан один пост:', post);
+  console.log('Создан один комментарий:', comment);
 }
 
-async function createManyPosts() {
-  const posts = await prisma.posts.createMany({
+async function createManyComments(postId: number) {
+  const comments = await prisma.Comments.createMany({
     data: [
-      { post: 'Второй пост', text: 'Cодержимое второго поста' },
-      { post: 'Третий пост', text: 'Cодержимое третьего поста' },
+      { title: 'Второй комментарий', author: 'Автор 2', message: 'Текст второго комментария', postId: postId },
+      { title: 'Третий комментарий', author: 'Автор 3', message: 'Текст третьего комментария', postId: postId },
     ],
   });
-  console.log('Созданы несколько постов:', posts);
+  console.log('Созданы несколько комментариев:', comments);
 }
 
-async function updateOnePost(id: number) {
-  const updatedPost = await prisma.posts.update({
-    where: { id },
-    data: { post: 'Обновленный заголовок поста' },
-  });
-  console.log('Пост обновлен:', updatedPost);
-}
-
-async function getOnePost(id: number) {
-  const post = await prisma.posts.findUnique({
+async function deleteOneComment(id: number) {
+  const deletedComment = await prisma.Comments.delete({
     where: { id },
   });
-  console.log('Получен один пост:', post);
+  console.log('Комментарий удален:', deletedComment);
 }
 
-async function getManyPosts() {
-  const posts = await prisma.posts.findMany();
-  console.log('Получены несколько постов:', posts);
-}
-
-async function deleteOnePost(id: number) {
-  const deletedPost = await prisma.posts.delete({
+async function getOneComment(id: number) {
+  const comment = await prisma.Comments.findUnique({
     where: { id },
   });
-  console.log('Пост удален:', deletedPost);
+  console.log('Получен один комментарий:', comment);
+}
+
+async function getOneCommentWithPost(id: number) {
+  const comment = await prisma.Comments.findUnique({
+    where: { id },
+    include: { post: true },
+  });
+  console.log('Комментарий с постом:', comment);
+}
+
+async function getPostWithComments(id: number) {
+  const post = await prisma.Posts.findUnique({
+    where: { id },
+    include: { comments: true },
+  });
+  console.log('Пост с комментариями:', post);
+}
+
+async function updateOneComment(id: number) {
+  const updatedComment = await prisma.Comments.update({
+    where: { id },
+    data: { message: 'Обновленный текст комментария' },
+  });
+  console.log('Комментарий обновлен:', updatedComment);
 }
 
 async function main() {
-  await createOnePost();
-  await createManyPosts(); 
-  await updateOnePost(1); 
-  await getOnePost(1);
-  await getManyPosts(); 
-  await deleteOnePost(1); 
+  const post = await prisma.Posts.create({
+    data: {
+      post: 'Пост для комментариев',
+      text: 'Текст поста для проверки связей с комментариями',
+    },
+  });
+
+  await createOneComment(post.id);
+  await createManyComments(post.id);
+  await getOneComment(1);
+  await getOneCommentWithPost(1);
+  await getPostWithComments(post.id);
+  await updateOneComment(1);
+  await deleteOneComment(1);
 }
 
 main()
