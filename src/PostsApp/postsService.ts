@@ -1,3 +1,5 @@
+import postRepository from './postsRepository';
+
 type Post = {
     id: number;
     post: string;
@@ -22,20 +24,26 @@ type Post = {
     }
   ];
   
-  export function getAllPosts(max: number): { posts: Post[] } {
-    const context = { posts };
-    if (max <= posts.length) {
-      context.posts = posts.slice(0, max);
-    }
-    return context;
-  }
-  
-  export function getPostById(id: number): { context: { post: Post }, length: number } {
-    const context = { post: posts[id - 1] };
-    return { context, length: posts.length };
-  }
-  
-  export function createPost(data: Post): void {
-    posts.push(data);
-  }
+
+
+async function getAllPosts() {
+    return await postRepository.getAllPosts();
+}
+
+async function getPostById(id: number) {
+    return await postRepository.getPostById(id);
+}
+
+async function createPost(data: { post: string, text: string }) {
+    return await postRepository.createPost(data);
+}
+
+const postService = {
+    getAllPosts,
+    getPostById,
+    createPost
+};
+
+export default postService;
+
   

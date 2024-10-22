@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import path from 'path';
-import postsRouter from './routers/postsRouter';
+import postsRouter from './PostsApp/postsRouter';
 import commentsRouter from './routers/commentsRouter';
 
 const app: Express = express();
