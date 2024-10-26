@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 
 async function getAllPosts() {
     try {
-        let posts = await client.post.findMany();
+        let posts = await client.posts.findMany();
         return posts;
     } catch (err) {
         if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -15,7 +15,7 @@ async function getAllPosts() {
 
 async function getPostById(id: number) {
     try {
-        let post = await client.post.findUnique({
+        let post = await client.posts.findUnique({
             where: {
                 id: id
             }
@@ -29,9 +29,9 @@ async function getPostById(id: number) {
     }
 }
 
-async function createPost(data: Prisma.PostCreateInput) {
+async function createPost(data: Prisma.PostsCreateInput) {
     try {
-        let post = await client.post.create({
+        let post = await client.posts.create({
             data: data
         });
         return post;

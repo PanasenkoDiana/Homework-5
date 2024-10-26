@@ -3,7 +3,9 @@ model Comments {
   title String
   author String
   message String
+  postId    Int
+  userId    Int
 
   post      Posts    @relation(fields: [postId], references: [id])
-  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }

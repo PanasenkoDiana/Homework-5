@@ -2,6 +2,8 @@ model Posts {
   id        Int       @id @default(autoincrement())
   post      String
   text      String
-
+  userId    Int
+  
   comments  Comments[]
+  user      User     @relation(fields: [userId], references: [id])
 }
