@@ -10,4 +10,5 @@ router.post("/login", userController.authLogin);
 router.get("/registration", userController.getRegistrationPage);
 router.post("/registration", userController.authRegistration);
 
+
 export default router;
